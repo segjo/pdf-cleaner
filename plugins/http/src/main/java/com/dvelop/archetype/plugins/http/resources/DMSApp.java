@@ -1,5 +1,8 @@
 package com.dvelop.archetype.plugins.http.resources;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +25,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,7 +34,7 @@ import com.dvelop.archetype.plugins.context.TenantHolder;
 
 @Path(DMSApp.PATH)
 public class DMSApp {
-    public static final String PATH = "/processDocument/{repoDokId}";
+    public static final String PATH = "/processDocument/";
 
     //Benötigte Variablen initialisieren
     Logger log = LoggerFactory.getLogger(this.getClass());
@@ -52,15 +56,15 @@ public class DMSApp {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
-    public Response testRepo(@CookieParam("AuthSessionId") String authKey, @Context HttpHeaders headers, @PathParam("repoDokId") String repoDokId) throws MalformedURLException, IOException {        
-        String[] splittedRepoDokId = repoDokId.split("#");
+    public Response testRepo(@CookieParam("AuthSessionId") String authKey, @Context HttpHeaders headers, @QueryParam("docId") String docID, @QueryParam("repoId") String repositoryId) throws MalformedURLException, IOException {        
+        /*String[] splittedRepoDokId = repoDokId.split("#");
 
         if(splittedRepoDokId.length >= 0) {
             repositoryId = splittedRepoDokId[0];
         }
         if(splittedRepoDokId.length >= 1) {
             docID = splittedRepoDokId[1];
-        }
+        }*/
 
         downloadDokURL = tenantHolder.getBaseUri() + "/dms/r/" + repositoryId + "/o2/" + docID + "/v/current/b/main/c";
         uploadDokURL = tenantHolder.getBaseUri() + "/dms/r/" + repositoryId + "/blob/chunk/";
@@ -95,6 +99,27 @@ public class DMSApp {
         output.close();
 
         //Aufrufen der anderen Funktion
+        int pagecount = 0;
+        List<Integer> pagesToRemove = new ArrayList<>();
+
+        PDDocument document = PDDocument.load(file);
+        for (PDPage pdPage : document.getPages()) {
+            PDFTextStripper textStripper = new PDFTextStripper();
+            textStripper.setStartPage(pagecount+1);
+            textStripper.setEndPage(pagecount+1);
+            String text = textStripper.getText(document);
+            text = text.trim();
+            if (text == null || text.equals("")) {
+                pagesToRemove.add(pagecount);
+            }
+            pagecount++;
+        }
+
+        for (Integer pagenumber : pagesToRemove) {
+            document.removePage(pagenumber);
+        }
+
+        document.save(file);
 
         //Temporärer Upload der geänderten Datei
         httpConnection = (HttpURLConnection) new URL(uploadDokURL).openConnection();

@@ -29,6 +29,11 @@
             <version>${project.version}</version>
             <artifactId>context</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.26</version>
+        </dependency>
 
         <!-- sdk -->
 
