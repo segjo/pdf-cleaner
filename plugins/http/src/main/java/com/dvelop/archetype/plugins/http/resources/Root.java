@@ -22,7 +22,7 @@ public class Root {
         String title, version;
 
         @XmlAttribute(name="_links")
-        Map<String, com.dvelop.archetype.plugins.http.Link> links = new HashMap<>();
+        Map<String, com.dvelop.archetype.plugins.http.Link> _links = new HashMap<>();
 
         public RootDto(String title, String version) {
             this.title = title;
@@ -45,12 +45,12 @@ public class Root {
             this.version = version;
         }
 
-        public Map<String, com.dvelop.archetype.plugins.http.Link> getLinks() {
-            return links;
+        public Map<String, com.dvelop.archetype.plugins.http.Link> get_links() {
+            return _links;
         }
 
-        public void setLinks(Map<String, com.dvelop.archetype.plugins.http.Link> links) {
-            this.links = links;
+        public void setLinks(Map<String, com.dvelop.archetype.plugins.http.Link> _links) {
+            this._links = _links;
         }
     }
 
@@ -65,9 +65,9 @@ public class Root {
     public Response getRoot() {
         RootDto dto = new RootDto(appInfo.getName(), appInfo.getVersion());
 
-        dto.getLinks().put("self", new com.dvelop.archetype.plugins.http.Link(uriInfo.getBaseUri().relativize(URI.create("/"+appInfo.getName()))));
-        dto.getLinks().put("featuresdescription", new Link(uriInfo.getBaseUri().relativize(URI.create("/" + appInfo.getName() + Features.PATH))));
-
+        dto.get_links().put("self", new com.dvelop.archetype.plugins.http.Link(uriInfo.getBaseUri().relativize(URI.create("/"+appInfo.getName()))));
+        dto.get_links().put("featuresdescription", new Link(uriInfo.getBaseUri().relativize(URI.create("/" + appInfo.getName() + Features.PATH))));
+        dto.get_links().put("dmsobjectextensions", new Link(uriInfo.getBaseUri().relativize(URI.create("/" + appInfo.getName() + Dmsobjectextensions.PATH))));
         return Response.ok(dto).build();
     }
 

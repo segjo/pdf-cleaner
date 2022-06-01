@@ -7,15 +7,32 @@ public class FeatureDto {
     String summary;
     String url;
     String color;
+    String iconURI;
+    BadgeDto badge;
 
-    public FeatureDto(String title, String subtitle, String description, String summary, String url, String color, String icon) {
+    public static class BadgeDto {
+        int count;
+        public BadgeDto(int count){
+            this.count=count;
+        }
+        public int getCount() {
+            return count;
+        }
+    }
+
+    public FeatureDto(String title, String subtitle, String description, String summary, String url, String color, String iconURI) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.summary = summary;
         this.url = url;
         this.color = color;
-        this.icon = icon;
+        this.iconURI = iconURI;
+        this.badge = new BadgeDto(0);
+    }
+
+    public BadgeDto getBadge() {
+        return badge;
     }
 
     public String getTitle() {
@@ -66,13 +83,11 @@ public class FeatureDto {
         this.color = color;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getIconURI() {
+        return iconURI;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIconURI(String iconURI) {
+        this.iconURI = iconURI;
     }
-
-    String icon;
 }

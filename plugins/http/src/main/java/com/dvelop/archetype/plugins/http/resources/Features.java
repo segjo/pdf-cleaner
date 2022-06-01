@@ -34,6 +34,7 @@ public class Features {
     @GET
     @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
     public Response getFeatures() {
+        System.out.println("getFeatures called");
 
         FeaturesDto dto = new FeaturesDto();
         dto.features = new FeatureDto[]{
@@ -42,9 +43,9 @@ public class Features {
                         "Manage vacation requests",
                         "Apply for vacation and approve the vacation requests of your employees",
                         "Your vacation requests and the requests of your employees",
-                        "/" + appInfo.getName() + List.PATH,
+                        "/hackathon-demo/requests",
                         "#adff2f",
-                        "dv-search"
+                        "https://cdn-icons-png.flaticon.com/512/2890/2890529.png"
                 )
         };
 

@@ -17,14 +17,14 @@ public class Dmsobjectextensions {
     public static final String PATH = "/dmsobjectextensions";
 
     public static class DmsobjectextensionsDto {
-        DmsobjectextensionDto[] dmsobjectextensions;
+        DmsobjectextensionDto[] extensions;
 
-        public DmsobjectextensionDto[] getDmsobjectextensions() {
-            return dmsobjectextensions;
+        public DmsobjectextensionDto[] getExtensions() {
+            return extensions;
         }
 
-        public void setDmsobjectextensions(DmsobjectextensionDto[] dmsobjectextensions) {
-            this.dmsobjectextensions = dmsobjectextensions;
+        public void setExtensions(DmsobjectextensionDto[] extensions) {
+            this.extensions = extensions;
         }
     }
 
@@ -34,14 +34,13 @@ public class Dmsobjectextensions {
     @GET
     @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
     public Response getDmsobjectextensions() {
-
         DmsobjectextensionsDto dto = new DmsobjectextensionsDto();
-        dto.dmsobjectextensions = new DmsobjectextensionDto[]{
+        dto.extensions = new DmsobjectextensionDto[]{
                 new DmsobjectextensionDto(
-                        "hackathon-demo.open",
+                        "hackathon-demo.openExternalApp",
                         "DmsObjectDetailsContextAction",
                         "/" + appInfo.getName() + "?id={dmsobject.property_document_id}",
-                        "dv-search"
+                        "https://cdn-icons-png.flaticon.com/512/2890/2890529.png"
                 )
         };
 
