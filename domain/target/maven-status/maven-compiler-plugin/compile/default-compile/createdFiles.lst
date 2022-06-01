@@ -1,0 +1,10 @@
+com/dvelop/archetype/VacationRequestRepository.class
+com/dvelop/archetype/ApplicationName.class
+com/dvelop/archetype/VacationRequest.class
+com/dvelop/archetype/usecases/cancelVacation/UseCaseCancelVacationRequest.class
+com/dvelop/archetype/VacationRequestException.class
+com/dvelop/archetype/usecases/applyForVacation/UseCaseApplyForVacation.class
+com/dvelop/archetype/VacationRequestState.class
+com/dvelop/archetype/usecases/acceptVacationRequest/UseCaseAcceptVacationRequest.class
+com/dvelop/archetype/usecases/rejectRequest/UseCaseRejectVacationRequest.class
+com/dvelop/archetype/VacationType.class

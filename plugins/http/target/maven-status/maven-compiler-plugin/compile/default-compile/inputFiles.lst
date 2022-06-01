@@ -1,0 +1,16 @@
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/dto/IdpDemoDto.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/resources/Root.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/dto/FeatureDto.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/template/AppInfo.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/resources/Features.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/resources/IdpDemo.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/resources/List.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/resources/Request.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/Link.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/dto/StateUpdateDto.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/filter/InjectableIDPIdentityProviderFilter.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/template/ThymeleafRenderer.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/filter/InjectableTenantFilter.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/dto/VacationRequestDto.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/template/TemplateName.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/plugins/http/src/main/java/com/dvelop/archetype/plugins/http/MediaType.java

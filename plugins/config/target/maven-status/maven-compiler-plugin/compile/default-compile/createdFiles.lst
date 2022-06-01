@@ -1,0 +1,3 @@
+com/dvelop/archetype/plugins/config/ConfigProvider.class
+com/dvelop/archetype/plugins/config/ConfigurationRepository.class
+com/dvelop/archetype/plugins/config/ConfigProperty.class

@@ -1,0 +1,10 @@
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/VacationType.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/usecases/applyForVacation/UseCaseApplyForVacation.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/ApplicationName.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/VacationRequestRepository.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/usecases/acceptVacationRequest/UseCaseAcceptVacationRequest.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/usecases/cancelVacation/UseCaseCancelVacationRequest.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/VacationRequestException.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/VacationRequestState.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/VacationRequest.java
+/home/seg/dev/projects.apps/dvelop-app-template-java/domain/src/main/java/com/dvelop/archetype/usecases/rejectRequest/UseCaseRejectVacationRequest.java
