@@ -1,5 +1,6 @@
 package com.dvelop.archetype.plugins.http.resources;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -102,7 +103,8 @@ public class DMSApp {
         int pagecount = 0;
         List<Integer> pagesToRemove = new ArrayList<>();
 
-        PDDocument document = PDDocument.load(file);
+        //PDDocument document = PDDocument.load(file);
+        PDDocument document = Loader.loadPDF(file);
         for (PDPage pdPage : document.getPages()) {
             PDFTextStripper textStripper = new PDFTextStripper();
             textStripper.setStartPage(pagecount+1);

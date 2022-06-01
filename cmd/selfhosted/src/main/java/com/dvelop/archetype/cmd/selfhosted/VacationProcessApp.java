@@ -13,7 +13,7 @@ public class VacationProcessApp {
     public static void main(String[] args) throws Exception {
 
         Map<String, String> env = System.getenv();
-
+        System.out.println("JAVA VERSION: " + System.getProperty("java.version"));
         env.forEach((key, value) -> System.out.println(key + " : " + value));
 
         Configuration cfg = new Configuration();
