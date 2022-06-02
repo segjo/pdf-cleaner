@@ -5,13 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.http.HttpHeaders;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +26,14 @@ import javax.ws.rs.core.Response;
 
 import com.dvelop.archetype.plugins.context.TenantHolder;
 
-@Path(DownloadDocument.PATH)
-public class DownloadDocument {
-    public static final String PATH = "/document/download";
+@Path(UploadDocument.PATH)
+public class UploadDocument {
+    public static final String PATH = "/document/upload";
 
     // Benötigte Variablen initialisieren
     Logger log = LoggerFactory.getLogger(this.getClass());
     String repositoryId;
-    String docID;
-    String downloadDokURL;
+    String uploadDokURL;
     String AuthSessionID;
     List<String> headerValueList = new ArrayList<>();
     int responseCode;
@@ -46,12 +44,13 @@ public class DownloadDocument {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
-    public Response downloadDocument(@CookieParam("AuthSessionId") String authKey, @Context HttpHeaders headers, @QueryParam("docId") String docID, @QueryParam("repoId") String repositoryId) throws MalformedURLException, IOException {        
+    public Response testRepo(@CookieParam("AuthSessionId") String authKey, @Context HttpHeaders headers, @QueryParam("repoId") String repositoryId, @QueryParam("filePath") String filePath) throws MalformedURLException, IOException {        
+        uploadDokURL = tenantHolder.getBaseUri() + "/dms/r/" + repositoryId + "/blob/chunk/";
 
-        downloadDokURL = tenantHolder.getBaseUri() + "/dms/r/" + repositoryId + "/o2/" + docID + "/v/current/b/main/c";
-
-        //Download des Dokumentes
-        HttpURLConnection httpConnection = (HttpURLConnection) new URL(downloadDokURL).openConnection();
+        //Temporärer Upload der geänderten Datei
+        HttpURLConnection httpConnection = (HttpURLConnection) new URL(uploadDokURL).openConnection();
+        httpConnection.setRequestProperty("Content-Type", "application/octet-stream");
+        httpConnection.setRequestProperty("Origin", tenantHolder.getBaseUri());
         if(authKey != null) {
             String myCookie = "AuthSessionId=" + authKey;
             httpConnection.setRequestProperty("Cookie", myCookie);
@@ -64,24 +63,25 @@ public class DownloadDocument {
             }
             httpConnection.setRequestProperty("Authorization", "Bearer " + AuthSessionID);
         }
-
-        httpConnection.setRequestMethod("GET");
-
-        File file = File.createTempFile( "tempfile", ".pdf");
-        InputStream inStream = httpConnection.getInputStream();
-        byte[] buffer = new byte[4096];
-        int n;
-        OutputStream output = new FileOutputStream(file);
+        httpConnection.setDoOutput(true);
+        httpConnection.setRequestMethod("POST");
         
-        while ((n = inStream.read(buffer)) != -1) {
-            output.write(buffer, 0, n);
+        File file = new File(filePath);
+        try {
+            OutputStream os = httpConnection.getOutputStream();
+            byte[] bytearray = Files.readAllBytes(file.toPath());
+                os.write(bytearray, 0, bytearray.length);
+        } catch (Exception ex) {
+            //Something to do
         }
-        output.close();
 
         responseCode = httpConnection.getResponseCode();
-        if(file.length() > 0) {
-            return Response.ok(file.getAbsolutePath()).build();
-        }else{
+
+        if (responseCode == 201) {
+            String locationHeader = httpConnection.getHeaderField("Location");
+            return Response.ok(locationHeader).build();
+        }
+        else {
             return Response.status(responseCode).build();
         }
     }
