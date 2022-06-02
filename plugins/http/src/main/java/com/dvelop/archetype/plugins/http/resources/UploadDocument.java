@@ -43,7 +43,7 @@ public class UploadDocument {
     TenantHolder tenantHolder;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
+    @Produces({MediaType.TEXT_PLAIN, "text/plain"})
     public Response testRepo(@CookieParam("AuthSessionId") String authKey, @Context HttpHeaders headers, @QueryParam("repoId") String repositoryId, @QueryParam("filePath") String filePath) throws MalformedURLException, IOException {        
         uploadDokURL = tenantHolder.getBaseUri() + "/dms/r/" + repositoryId + "/blob/chunk/";
 

@@ -30,45 +30,61 @@ for(host = 0; host <= hosts; host++){
        console.log("Data: " + data + "\nStatus: " + status);
   });
 }*/
-const element = document.getElementById("processDetail");
-
+var element = document.getElementById("processDetail");
+element.innerHTML = "download document...";
 $.get("/hackathon-demo/document/download?docId="+docId+"&repoId="+repoId, function(data, status){
        console.log("Data: " + data + "\nStatus: " + status);
        file=data;
        updateProgress(25);
-       element.innerHTML = "download document...";
+       element.innerHTML = "process document...";
        getProcessDocument();
 
-});
+})
+
+
         });
 
 
 function getProcessDocument(){
-    $.get("/hackathon-demo/document/process?filePath="+file, function(data, status){
+    var element = document.getElementById("processDetail");
+    $.get("/hackathon-demo/document/process?filePath="+encodeURI(file), function(data, status){
        console.log("Data: " + data + "\nStatus: " + status);
-       updateProgress(50);
-       element.innerHTML = "process document...";
-       getUploadDocument();
+       if(data == "no blank pages detected / document has only one page"){
+            updateProgress(100);
+            element.innerHTML = data;
+            setTimeout(function() {
+                dapi.closeResourceIfMainResource();
+}, 2000);
+            
+       }else{
+        updateProgress(50);
+        element.innerHTML = "upload document...";
+        getUploadDocument();
+       }
 });
 }
 
 function getUploadDocument(){
-    $.get("/hackathon-demo/document/upload?filePath="+file+"&repoId="+repoId, function(data, status){
+    var element = document.getElementById("processDetail");
+    $.get("/hackathon-demo/document/upload?filePath="+encodeURI(file)+"&repoId="+repoId, function(data, status){
        console.log("Data: " + data + "\nStatus: " + status);
        chunk=data;
        updateProgress(75);
-       element.innerHTML = "upload document...";
+       element.innerHTML = "update document...";
        getUpdateDocument();
 
 });
 }
 
 function getUpdateDocument(){
-    $.get("/hackathon-demo/document/update?filePath="+chunk+"&docId="+docId+"&repoId="+repoId, function(data, status){
+    var element = document.getElementById("processDetail");
+    $.get("/hackathon-demo/document/update?chunkPath="+encodeURI(chunk)+"&docId="+docId+"&repoId="+repoId, function(data, status){
        console.log("Data: " + data + "\nStatus: " + status);
        updateProgress(100);
        element.innerHTML = "done";
-       dapi.closeResourceIfMainResource();
+       setTimeout(function() {
+                dapi.closeResourceIfMainResource();
+}, 2000);
 });
 }
 
@@ -89,6 +105,10 @@ function getUrlParameter(sParam) {
     }
     return false;
 };
+
+
+
+
 
 function updateProgress(percentage){
     if(percentage > 100) percentage = 100;

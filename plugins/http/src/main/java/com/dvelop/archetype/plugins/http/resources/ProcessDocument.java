@@ -33,7 +33,7 @@ public class ProcessDocument {
     TenantHolder tenantHolder;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
+    @Produces({MediaType.TEXT_PLAIN, "text/plain"})
     public Response processDocument(@QueryParam("filePath") String filePath) throws MalformedURLException, IOException {        
         //Aufrufen der anderen Funktion
         int pagecount = 0;

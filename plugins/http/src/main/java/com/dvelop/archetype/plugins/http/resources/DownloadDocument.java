@@ -45,7 +45,7 @@ public class DownloadDocument {
     TenantHolder tenantHolder;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
+    @Produces({MediaType.TEXT_PLAIN, "text/plain"})
     public Response downloadDocument(@CookieParam("AuthSessionId") String authKey, @Context HttpHeaders headers, @QueryParam("docId") String docID, @QueryParam("repoId") String repositoryId) throws MalformedURLException, IOException {        
 
         downloadDokURL = tenantHolder.getBaseUri() + "/dms/r/" + repositoryId + "/o2/" + docID + "/v/current/b/main/c";
