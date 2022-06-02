@@ -13,7 +13,6 @@
     <artifactId>plugins</artifactId>
 
     <modules>
-        <module>memory-repository</module>
         <module>http</module>
         <module>environment-configuration</module>
         <module>context</module>
