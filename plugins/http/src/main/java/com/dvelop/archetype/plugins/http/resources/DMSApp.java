@@ -37,7 +37,7 @@ import com.dvelop.archetype.plugins.context.TenantHolder;
 public class DMSApp {
     public static final String PATH = "/processDocument/";
 
-    //Benötigte Variablen initialisieren
+    // Benötigte Variablen initialisieren
     Logger log = LoggerFactory.getLogger(this.getClass());
     String repositoryId;
     String docID;
@@ -52,7 +52,7 @@ public class DMSApp {
     String success = "Nein :(";
 
     @Inject
-    //Brauchen wir für die BaseURI
+    // Brauchen wir für die BaseURI
     TenantHolder tenantHolder;
 
     @GET
@@ -99,30 +99,37 @@ public class DMSApp {
         }
         output.close();
 
+        boolean newVersion=false;
         //Aufrufen der anderen Funktion
         int pagecount = 0;
         List<Integer> pagesToRemove = new ArrayList<>();
 
         //PDDocument document = PDDocument.load(file);
         PDDocument document = Loader.loadPDF(file);
-        for (PDPage pdPage : document.getPages()) {
-            PDFTextStripper textStripper = new PDFTextStripper();
-            textStripper.setStartPage(pagecount+1);
-            textStripper.setEndPage(pagecount+1);
-            String text = textStripper.getText(document);
-            text = text.trim();
-            if (text == null || text.equals("")) {
-                pagesToRemove.add(pagecount);
+        if(document.getNumberOfPages()>1){
+            for (PDPage pdPage : document.getPages()) {
+                PDFTextStripper textStripper = new PDFTextStripper();
+                textStripper.setStartPage(pagecount+1);
+                textStripper.setEndPage(pagecount+1);
+                String text = textStripper.getText(document);
+                text = text.trim();
+                if (text == null || text.equals("")) {
+                    newVersion=true;
+                    pagesToRemove.add(pagecount);
+                }
+                pagecount++;
             }
-            pagecount++;
         }
 
         for (Integer pagenumber : pagesToRemove) {
+            System.out.println("remove page: " + pagenumber);
             document.removePage(pagenumber);
         }
 
         document.save(file);
+        document.close();
 
+        if(newVersion){
         //Temporärer Upload der geänderten Datei
         httpConnection = (HttpURLConnection) new URL(uploadDokURL).openConnection();
         httpConnection.setRequestProperty("Content-Type", "application/octet-stream");
@@ -197,7 +204,10 @@ public class DMSApp {
         else {
             return Response.ok(success).build();
         }
-
-        return Response.ok(success).build();
+            return Response.ok(success).build();
+        }else{
+            return Response.ok("no blank pages detected / document has only one page").build();
+        }
+        
     }
 }
