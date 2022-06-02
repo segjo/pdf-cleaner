@@ -39,10 +39,10 @@ public class Features {
         FeaturesDto dto = new FeaturesDto();
         dto.features = new FeatureDto[]{
                 new FeatureDto(
-                        "Vacation management",
-                        "Manage vacation requests",
-                        "Apply for vacation and approve the vacation requests of your employees",
-                        "Your vacation requests and the requests of your employees",
+                        "pdf cleaner",
+                        "for usage go to a pdf document context-menu",
+                        "demo app d-velop hackathon 19.07.2022-20.07.2022",
+                        "remove blank sites from a selected pdf document in d.velop documents",
                         "/hackathon-demo/requests",
                         "#adff2f",
                         "https://cdn-icons-png.flaticon.com/512/2890/2890529.png"

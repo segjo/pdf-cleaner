@@ -70,9 +70,9 @@ public class DmsobjectextensionDto {
 
     this.activationConditions = new ActivationConditionDto[]{
         new ActivationConditionDto(
-                "repository.id",
+                "dmsobject.property_filetype",
                 "or",
-                new String[]{"a31c2c9d-7dc5-421f-879f-dca5afc32bb5"}
+                new String[]{"PDF"}
         ) 
     };
     }
