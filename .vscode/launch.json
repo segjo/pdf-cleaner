@@ -20,7 +20,7 @@
             "mainClass": "com.dvelop.archetype.cmd.selfhosted.VacationProcessApp",
             "projectName": "selfhosted",
             "env": {
-                "SIGNATURE_SECRET": ""
+                "SIGNATURE_SECRET": "="
               },
         }
 
