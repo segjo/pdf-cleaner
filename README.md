@@ -15,15 +15,6 @@ set SIGNATURE_SECRET as enviroment-variable. In vscode you can use .vscode/launc
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "${file}",
-            "env": {
-                "SIGNATURE_SECRET": ""
-              },
-        },
-        {
-            "type": "java",
             "name": "Launch PdfCleanerApp",
             "request": "launch",
             "mainClass": "com.dvelop.archetype.cmd.selfhosted.PdfCleanerApp",
