@@ -43,7 +43,7 @@ public class Features {
                         "for usage go to a pdf document context-menu",
                         "demo app d-velop hackathon 19.07.2022-20.07.2022",
                         "remove blank sites from a selected pdf document in d.velop documents",
-                        "/hackathon-demo/requests",
+                        "/hackathon-demo/",
                         "#adff2f",
                         "https://cdn-icons-png.flaticon.com/512/2890/2890529.png"
                 )

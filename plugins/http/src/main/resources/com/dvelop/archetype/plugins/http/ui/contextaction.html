@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <title th:text="${app.name}">App</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     <script src="https://cdn.service.d-velop.cloud/dapi/latest/dapi.js"></script>
+
+    <script  type="text/javascript">
+
+var repoId = getUrlParameter('repoId');
+var docId = getUrlParameter('docId');
+var file = "";
+var chunk = "";
+
+        $(document).ready(function () {
+
+
+/*
+var hosts = 100;
+for(host = 0; host <= hosts; host++){
+    ipToCheck = '130.'+host;
+    updateProgress(host)
+    $.get("demo_test.asp", function(data, status){
+        host++;
+       console.log("Data: " + data + "\nStatus: " + status);
+  });
+}*/
+const element = document.getElementById("processDetail");
+
+$.get("/hackathon-demo/document/download?docId="+docId+"&repoId="+repoId, function(data, status){
+       console.log("Data: " + data + "\nStatus: " + status);
+       file=data;
+       updateProgress(25);
+       element.innerHTML = "download document...";
+       getProcessDocument();
+
+});
+        });
+
+
+function getProcessDocument(){
+    $.get("/hackathon-demo/document/process?filePath="+file, function(data, status){
+       console.log("Data: " + data + "\nStatus: " + status);
+       updateProgress(50);
+       element.innerHTML = "process document...";
+       getUploadDocument();
+});
+}
+
+function getUploadDocument(){
+    $.get("/hackathon-demo/document/upload?filePath="+file+"&repoId="+repoId, function(data, status){
+       console.log("Data: " + data + "\nStatus: " + status);
+       chunk=data;
+       updateProgress(75);
+       element.innerHTML = "upload document...";
+       getUpdateDocument();
+
+});
+}
+
+function getUpdateDocument(){
+    $.get("/hackathon-demo/document/update?filePath="+chunk+"&docId="+docId+"&repoId="+repoId, function(data, status){
+       console.log("Data: " + data + "\nStatus: " + status);
+       updateProgress(100);
+       element.innerHTML = "done";
+       dapi.closeResourceIfMainResource();
+});
+}
+
+
+
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    return false;
+};
+
+function updateProgress(percentage){
+    if(percentage > 100) percentage = 100;
+    $('#progressBar').css('width', percentage+'%');
+    $('#progressBar').html(percentage+'%');
+}
+
+
+
+    </script>
+</head>
+<body>
+<div style="margin: 20px">
+    <h1>cleaning document</h1>
+    <div class="progress progress-striped active" style="height:10px;">
+        <div id="progressBar" class="bar" style="height:44px;width:1%;background-color:green"></div>
+       
+    </div>
+    <p id="processDetail"></p>
+</div>
+
+  </body>
+</html>

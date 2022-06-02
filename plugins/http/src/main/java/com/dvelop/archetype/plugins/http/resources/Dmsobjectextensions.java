@@ -39,7 +39,7 @@ public class Dmsobjectextensions {
                 new DmsobjectextensionDto(
                         "hackathon-demo.openExternalApp",
                         "DmsObjectDetailsContextAction",
-                        "/" + appInfo.getName() + "/processDocument?docId={dmsobject.property_document_id}&repoId={repository.id}",
+                        "/" + appInfo.getName() + "/contextaction?docId={dmsobject.property_document_id}&repoId={repository.id}",
                         "https://cdn-icons-png.flaticon.com/512/2890/2890529.png"
                 )
         };
