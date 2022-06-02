@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dvelop.archetype</groupId>
-    <artifactId>dvelop-app-template-java</artifactId>
+    <artifactId>pdf-cleaner</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 

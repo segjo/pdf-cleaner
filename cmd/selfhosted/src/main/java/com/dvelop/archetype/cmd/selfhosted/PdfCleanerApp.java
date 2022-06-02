@@ -8,7 +8,7 @@ import org.apache.tomee.embedded.Container;
 import java.io.File;
 import java.util.Map;
 
-public class VacationProcessApp {
+public class PdfCleanerApp {
 
     public static void main(String[] args) throws Exception {
 
